@@ -33,7 +33,7 @@ module.exports = {
       url:
         'https://eth-rinkeby.alchemyapi.io/v2/am_fb42tWDfhZ88EkuQKe0g9ueeWh14j',
       accounts: [
-        `0x493e52b24ac50e044812f59c8bd06d6dde41aef95a26d091f90e79daba2de7bc`,
+        `0x3577673fe76f48cdbebe3da7bfbf176f7bc0bb578e09319a1010fb6893fc59ba`,
       ],
       timeout: 300000,
     },

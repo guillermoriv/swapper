@@ -4,15 +4,15 @@ const Swapper = artifacts.require('Swapper');
 let swapper;
 
 beforeEach(async () => {
-  swapper = await Swapper.at('0x95E8DC281cf200bCB4eCa66B584695Ee6d931C99');
+  swapper = await Swapper.at('0x92c40B26b439d31fF3E2c3668157C870660e95E2');
 });
 
 describe('Testing the swapper', () => {
   it('Changing ETH for DAI', async () => {
-    const account = await web3.eth.getAccounts()[0];
+    const account = await web3.eth.getAccounts();
     await swapper.swapEthForToken(
       '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
-      { value: 20000, from: account }
+      { value: await web3.utils.toWei('1', 'ether'), from: account[0] }
     );
   });
 });

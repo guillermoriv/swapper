@@ -16,10 +16,10 @@ contract Swapper is Initializable {
   function swapEthForToken(address _token) external payable {
     require(msg.value >= 1, "Need to be greater then one");
     
-    address[] memory _path;
+   address[] memory _path = new address[](2);
     
     _path[0] = IUniswapV2Router02(UniswapRouter).WETH();
-    _path[1] = _token;
+    _path[1] = address(_token);
 
     IUniswapV2Router02(UniswapRouter).swapExactETHForTokens{value: msg.value}(1, _path, msg.sender, block.timestamp);
   }
