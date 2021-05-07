@@ -34,6 +34,74 @@
           }
         }
       }
+    },
+    "c59601700d388a375b566b0dc389fb186ef2fb3c7ad7991c7c216ba9f3fe29cd": {
+      "address": "0x6D8D3E8701E7A128a9Ed56A46C3A150F87750E0F",
+      "txHash": "0x19aba392171957397b646353c3d3c383b54b1e4c72b2ee59ecc566b54c103c19",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:23"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:28"
+          },
+          {
+            "contract": "Swapper",
+            "label": "admin",
+            "type": "t_address",
+            "src": "contracts/Swapper.sol:10"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "bf7f9379d1fbf16d90dd0344ef4b9d8bd33c7ad9563ada98feea02de36c69bd1": {
+      "address": "0x9062c95Ea5b78EC8f55AB521e075a619e731CA9F",
+      "txHash": "0x14ba4e5187f78c3a0bac38bed7f3a23a17ab0956edd9ebbed7e0aec797c8941e",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:23"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:28"
+          },
+          {
+            "contract": "SwapperV1",
+            "label": "admin",
+            "type": "t_address",
+            "src": "contracts/SwapperV1.sol:10"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
     }
   },
   "proxies": [
@@ -41,6 +109,11 @@
       "address": "0x5EB8B569eC853d4eC1F9683a6A1dEa8eF100eac1",
       "kind": "transparent",
       "txHash": "0x5d3661c01d33e83cd19b247fbe5890f7bdea569e4766887b3a0636f9fb776847"
+    },
+    {
+      "address": "0x1Cd3e3FB1e9F3cBac605024a85ddB800e94bD0A1",
+      "kind": "transparent",
+      "txHash": "0xa2f9820de1a308cc5e669ca9a34baea1e9bfa70ec5c15b873b2d8e92b23bcdc9"
     }
   ],
   "admin": {

@@ -5,7 +5,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-contract Swapper is Initializable {
+contract SwapperV1 is Initializable {
   address private constant UniswapRouter = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
   address private admin;
   using SafeMath for uint;
@@ -37,5 +37,9 @@ contract Swapper is Initializable {
       IUniswapV2Router02(UniswapRouter).swapExactETHForTokens{value: msg.value.mul(_porcents[i]).div(1000)}
       (1, _path, msg.sender, block.timestamp + 3600);
     }
+  }
+
+  function printVersion() external pure returns(string memory) {
+    return "Hello, V1";
   }
 }
