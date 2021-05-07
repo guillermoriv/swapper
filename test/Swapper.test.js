@@ -19,23 +19,31 @@ describe('Testing the Swapper', () => {
   });
 
   it('change ETH for multiple tokens', async () => {
+    const porcents = [40 * 10, 60 * 10];
+
+    console.log(porcents);
+
     await swapperV1.swapEthForToken(
       [
         '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
         '0x394a7017eafd9fd84840144dcfbbe3923ce5151a',
       ],
-      [40, 50],
+      [porcents[0], porcents[0]],
       { value: ethers.utils.parseEther('0.001') }
     );
   }).timeout(0);
 
   it('change ETH for multiple tokens with % with decimals', async () => {
+    const porcents = [70.5 * 10, 29.5 * 10];
+
+    console.log(porcents);
+
     await swapperV1.swapEthForToken(
       [
         '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
         '0x394a7017eafd9fd84840144dcfbbe3923ce5151a',
       ],
-      [69.5 * 100, 29.5 ** 100],
+      [porcents[0], porcents[0]],
       { value: ethers.utils.parseEther('0.001') }
     );
   }).timeout(0);
