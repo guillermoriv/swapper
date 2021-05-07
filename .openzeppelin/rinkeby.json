@@ -1,0 +1,50 @@
+{
+  "manifestVersion": "3.2",
+  "impls": {
+    "25400856411bb6b225048b45c1f6c30000142417aab75ec630da4dba6e1a211b": {
+      "address": "0x8daD3339cde1e56E00435104161DF2d5214D2dE5",
+      "txHash": "0xcef06c0ed57169f81b57db3a682b09ae89c4f13305434b9d22c8dd5dec3ed491",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:23"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:28"
+          },
+          {
+            "contract": "Swapper",
+            "label": "admin",
+            "type": "t_address",
+            "src": "contracts/Swapper.sol:10"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    }
+  },
+  "proxies": [
+    {
+      "address": "0x5EB8B569eC853d4eC1F9683a6A1dEa8eF100eac1",
+      "kind": "transparent",
+      "txHash": "0x5d3661c01d33e83cd19b247fbe5890f7bdea569e4766887b3a0636f9fb776847"
+    }
+  ],
+  "admin": {
+    "address": "0xa7B2d2cEd1288e2E338c668C810d0Aa00cA5bCca",
+    "txHash": "0x1ecf33b68097aefe43f4e15b5e5a289ed12c7e782602b096270717f5c4f17438"
+  }
+}

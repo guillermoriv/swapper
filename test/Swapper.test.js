@@ -1,18 +1,31 @@
-const { artifacts, assert, web3 } = require('hardhat');
+const { ethers } = require('hardhat');
+const assert = require('assert');
 
-const Swapper = artifacts.require('Swapper');
 let swapper;
 
 beforeEach(async () => {
-  swapper = await Swapper.at('0x92c40B26b439d31fF3E2c3668157C870660e95E2');
+  swapper = await ethers.getContractAt(
+    'Swapper',
+    '0x5EB8B569eC853d4eC1F9683a6A1dEa8eF100eac1'
+  );
 });
 
-describe('Testing the swapper', () => {
-  it('Changing ETH for DAI', async () => {
-    const account = await web3.eth.getAccounts();
-    await swapper.swapEthForToken(
-      '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
-      { value: await web3.utils.toWei('1', 'ether'), from: account[0] }
+describe('Testing the Swapper', () => {
+  it('have to be equal to the address of swapper', async () => {
+    assert.strictEqual(
+      swapper.address,
+      '0x5EB8B569eC853d4eC1F9683a6A1dEa8eF100eac1'
     );
   });
+
+  it('change ETH for multiple tokens', async () => {
+    await swapper.swapEthForToken(
+      [
+        '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
+        '0x394a7017eafd9fd84840144dcfbbe3923ce5151a',
+      ],
+      [40, 50],
+      { value: ethers.utils.parseEther('0.001') }
+    );
+  }).timeout(0);
 });

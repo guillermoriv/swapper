@@ -1,6 +1,6 @@
-require('@nomiclabs/hardhat-truffle5');
-require('@nomiclabs/hardhat-web3');
-require('@nomiclabs/hardhat-truffle5');
+require("@nomiclabs/hardhat-waffle");
+require('@openzeppelin/hardhat-upgrades');
+require('@nomiclabs/hardhat-ethers');
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -33,9 +33,10 @@ module.exports = {
       url:
         'https://eth-rinkeby.alchemyapi.io/v2/am_fb42tWDfhZ88EkuQKe0g9ueeWh14j',
       accounts: [
-        `0x3577673fe76f48cdbebe3da7bfbf176f7bc0bb578e09319a1010fb6893fc59ba`,
+        '0x493e52b24ac50e044812f59c8bd06d6dde41aef95a26d091f90e79daba2de7bc',
       ],
       timeout: 300000,
+      gas: 'auto',
     },
   },
 };
