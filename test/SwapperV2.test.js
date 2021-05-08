@@ -20,7 +20,7 @@ before(async () => {
 describe('Testing the Swapper', () => {
   it('print version of the contract', async () => {
     console.log(await swapperV2.printVersion());
-  }).timeout(0);
+  });
 
   it('change ETH for multiple tokens with balancer', async () => {
     const porcents = [40 * 10, 60 * 10];
@@ -35,7 +35,7 @@ describe('Testing the Swapper', () => {
       [porcents[0], porcents[1]],
       { value: ethers.utils.parseEther('2') }
     );
-  }).timeout(0);
+  }).timeout(30000000);
 
   it('change ETH for multiple tokens with % with decimals with balancer', async () => {
     const porcents = [70.5 * 10, 29.5 * 10];
@@ -50,7 +50,7 @@ describe('Testing the Swapper', () => {
       [porcents[0], porcents[1]],
       { value: ethers.utils.parseEther('4') }
     );
-  }).timeout(0);
+  }).timeout(30000000);
 
   it('change ETH for multiple tokens with uniswap', async () => {
     const porcents = [40 * 10, 60 * 10];
@@ -65,7 +65,7 @@ describe('Testing the Swapper', () => {
       [porcents[0], porcents[1]],
       { value: ethers.utils.parseEther('0.00001') }
     );
-  }).timeout(0);
+  }).timeout(30000000);
 
   it('change ETH for multiple tokens with % with decimals with uniswap', async () => {
     const porcents = [70.5 * 10, 29.5 * 10];
@@ -80,5 +80,5 @@ describe('Testing the Swapper', () => {
       [porcents[0], porcents[1]],
       { value: ethers.utils.parseEther('4') }
     );
-  }).timeout(0);
+  }).timeout(30000000);
 });

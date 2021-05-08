@@ -27,7 +27,7 @@ describe('Testing the Swapper', () => {
       [porcents[0], porcents[1]],
       { value: ethers.utils.parseEther('1') }
     );
-  }).timeout(0);
+  }).timeout(30000000);
 
   it('change ETH for multiple tokens with % with decimals', async () => {
     const porcents = [70.5 * 10, 29.5 * 10];
@@ -42,7 +42,7 @@ describe('Testing the Swapper', () => {
       [porcents[0], porcents[1]],
       { value: ethers.utils.parseEther('1') }
     );
-  }).timeout(0);
+  }).timeout(30000000);
 
   it('calling the printVersion', async () => {
     const result = await swapper.printVersion();

@@ -29,13 +29,16 @@ module.exports = {
     },
   },
   networks: {
+    localhost: {
+      timeout: 30000000,
+    },
     rinkeby: {
       url:
         'https://eth-rinkeby.alchemyapi.io/v2/am_fb42tWDfhZ88EkuQKe0g9ueeWh14j',
       accounts: [
         '0x493e52b24ac50e044812f59c8bd06d6dde41aef95a26d091f90e79daba2de7bc',
       ],
-      timeout: 300000,
+      timeout: 30000000,
       gas: 'auto',
     },
   },
