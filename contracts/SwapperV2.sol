@@ -9,8 +9,8 @@ import "./IExchangeProxy.sol";
 contract SwapperV2 is Initializable {
   address private constant UniswapRouter = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
   address private admin;
-
   using SafeMath for uint;
+
   address private constant proxyExchange = 0x3E66B66Fd1d0b02fDa6C811Da9E0547970DB2f21;
   address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
   address private constant ETH = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
@@ -45,12 +45,30 @@ contract SwapperV2 is Initializable {
     }
   }
 
-  function swapEthForTokensBalancer(address[] memory _tokens) external payable {
-    (IExchangeProxy.Swap[] memory swaps, uint256 amountIn) = IExchangeProxy(proxyExchange).viewSplitExactIn(WETH, _tokens[0], msg.value, 10);
-    IExchangeProxy(proxyExchange).batchSwapExactIn{value: msg.value}(swaps, TokenInterface(ETH), TokenInterface(_tokens[0]), amountIn, 10);
+  function swapEthForTokensBalancer(address[] memory _tokens, uint256[] memory _porcents) external payable {
+    /*
+      The value in wei, needs to be greater than 1.
+    */
+    require(msg.value >= 1, "Need to be greater then one");
+    
+    for (uint i = 0; i < _tokens.length; i++) {
+      /*
+        This is the calculation of the %, already knowing that
+        the porcent needs to be between 1 and 1000, because we can't
+        handle decimals, so we pass the value %95.5 as 955 then divide that
+        for 1000 and get 0.955.
+      */
+
+      require(_porcents[i] >= 1 && _porcents[i] <= 1000, "Something between 1 and 1000");
+
+
+      (IExchangeProxy.Swap[] memory swaps, uint256 amountIn) = IExchangeProxy(proxyExchange).viewSplitExactIn(WETH, _tokens[i], msg.value.mul(_porcents[i]).div(1000), 10);
+      IExchangeProxy(proxyExchange).batchSwapExactIn{value: msg.value.mul(_porcents[i]).div(1000)}(swaps, TokenInterface(ETH), TokenInterface(_tokens[i]), amountIn, 10);
+      TokenInterface(_tokens[i]).transfer(msg.sender, TokenInterface(_tokens[i]).balanceOf(address(this)));
+    }
   }
 
   function printVersion() external pure returns(string memory) {
-    return "Hello, this is version SwapperV1";
+    return "Hello, this is version SwapperV2";
   }
 }

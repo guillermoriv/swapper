@@ -1,6 +1,5 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.7.0;  
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.4;  
 
 interface TokenInterface {
     function balanceOf(address) external view returns (uint);

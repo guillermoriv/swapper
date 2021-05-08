@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "fork": "hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/am_fb42tWDfhZ88EkuQKe0g9ueeWh14j --fork-block-number 11589707",
-    "test": "hardhat test test/Swapper.test.js --network localhost"
+    "testv1": "hardhat test test/SwapperV1.test.js --network localhost",
+    "testv2": "hardhat test test/SwapperV2.test.js --network localhost"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
