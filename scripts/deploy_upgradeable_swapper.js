@@ -5,7 +5,7 @@ async function main() {
   console.log('Deploying Swapper...');
   const swapper = await upgrades.deployProxy(
     Swapper,
-    ['0xB71Bb954ca4742a9FA3b6a1611249315c2179fEe'],
+    ['0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266'],
     { initializer: 'initialize' }
   );
   console.log('Contract deployed in the address: ', swapper.address);

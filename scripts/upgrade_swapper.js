@@ -4,7 +4,7 @@ async function main() {
   const SwapperV1 = await ethers.getContractFactory('SwapperV1');
   console.log('Deploying Swapper...');
   await upgrades.upgradeProxy(
-    '0x1Cd3e3FB1e9F3cBac605024a85ddB800e94bD0A1',
+    '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853',
     SwapperV1
   );
   console.log('Swapper updated to SwapperV1');

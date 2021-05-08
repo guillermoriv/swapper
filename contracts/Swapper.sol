@@ -27,6 +27,7 @@ contract Swapper is Initializable {
         handle decimals, so we pass the value %95.5 as 955 then divide that
         for 1000 and get 0.955.
       */
+
       require(_porcents[i] >= 1 && _porcents[i] <= 1000, "Something between 1 and 1000");
 
       address[] memory _path = new address[](2);
@@ -37,5 +38,9 @@ contract Swapper is Initializable {
       IUniswapV2Router02(UniswapRouter).swapExactETHForTokens{value: msg.value.mul(_porcents[i]).div(1000)}
       (1, _path, msg.sender, block.timestamp + 3600);
     }
+  }
+
+  function printVersion() external pure returns(string memory) {
+    return "Hello, this is the base version of Swapper";
   }
 }

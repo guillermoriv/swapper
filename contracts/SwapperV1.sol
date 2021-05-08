@@ -4,12 +4,18 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "./IExchangeProxy.sol";
 
 contract SwapperV1 is Initializable {
   address private constant UniswapRouter = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
   address private admin;
   using SafeMath for uint;
-  
+
+
+  address private constant proxyExchange = 0x3E66B66Fd1d0b02fDa6C811Da9E0547970DB2f21;
+  address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+  address private constant ETH = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
+
   function initialize(address _admin) public initializer {
     admin = _admin;
   }
@@ -27,6 +33,7 @@ contract SwapperV1 is Initializable {
         handle decimals, so we pass the value %95.5 as 955 then divide that
         for 1000 and get 0.955.
       */
+
       require(_porcents[i] >= 1 && _porcents[i] <= 1000, "Something between 1 and 1000");
 
       address[] memory _path = new address[](2);
@@ -39,7 +46,12 @@ contract SwapperV1 is Initializable {
     }
   }
 
+  function swapEthForTokensBalancer(address[] memory _tokens) external payable {
+    (IExchangeProxy.Swap[] memory swaps, uint256 amountIn) = IExchangeProxy(proxyExchange).viewSplitExactIn(WETH, _tokens[0], msg.value, 10);
+    IExchangeProxy(proxyExchange).batchSwapExactIn{value: msg.value}(swaps, TokenInterface(ETH), TokenInterface(_tokens[0]), amountIn, 10);
+  }
+
   function printVersion() external pure returns(string memory) {
-    return "Hello, V1";
+    return "Hello, this is version SwapperV1";
   }
 }

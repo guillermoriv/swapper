@@ -4,6 +4,9 @@
   "description": "This is for EYSS Academy, SWAP CONTRACT.",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "fork": "hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/am_fb42tWDfhZ88EkuQKe0g9ueeWh14j --fork-block-number 11589707"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
