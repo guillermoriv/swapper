@@ -16,32 +16,30 @@ before(async () => {
 describe('Testing the Swapper', () => {
   it('change ETH for multiple tokens', async () => {
     const porcents = [40 * 10, 60 * 10];
+    const tokens = [
+      '0x6b175474e89094c44da98b954eedeac495271d0f', // DAI Stablecoin
+      '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', // Uniswap Token
+    ];
 
-    console.log(porcents);
-
-    await swapper.swapEthForToken(
-      [
-        '0x6b175474e89094c44da98b954eedeac495271d0f', // DAI Stablecoin
-        '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', // Uniswap Token
-      ],
-      [porcents[0], porcents[1]],
-      { value: ethers.utils.parseEther('1') }
-    );
+    for (let i = 0; i < tokens.length; i++) {
+      await swapper.swapEthForToken(tokens[i], porcents[i], {
+        value: ethers.utils.parseEther('1'),
+      });
+    }
   }).timeout(30000000);
 
   it('change ETH for multiple tokens with % with decimals', async () => {
     const porcents = [70.5 * 10, 29.5 * 10];
+    const tokens = [
+      '0x6b175474e89094c44da98b954eedeac495271d0f', // DAI Stablecoin
+      '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', // Uniswap Token
+    ];
 
-    console.log(porcents);
-
-    await swapper.swapEthForToken(
-      [
-        '0x6b175474e89094c44da98b954eedeac495271d0f', // DAI Stablecoin
-        '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', // Uniswap Token
-      ],
-      [porcents[0], porcents[1]],
-      { value: ethers.utils.parseEther('1') }
-    );
+    for (let i = 0; i < tokens.length; i++) {
+      await swapper.swapEthForToken(tokens[i], porcents[i], {
+        value: ethers.utils.parseEther('1'),
+      });
+    }
   }).timeout(30000000);
 
   it('calling the printVersion', async () => {
