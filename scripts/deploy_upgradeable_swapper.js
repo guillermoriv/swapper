@@ -1,7 +1,7 @@
 const { upgrades, ethers } = require('hardhat');
 
 async function main() {
-  const Swapper = await ethers.getContractFactory('Swapper');
+  const Swapper = await ethers.getContractFactory('SwapperV2');
   console.log('Deploying Swapper...');
   const swapper = await upgrades.deployProxy(
     Swapper,

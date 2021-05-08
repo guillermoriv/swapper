@@ -205,40 +205,6 @@
         }
       }
     },
-    "8a49049d8a91513b3c9ba30d7ee35073d58e14006c00aa2fa10f131b6371591e": {
-      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x37574bcd3f0f332b5f1c96deb64b71bf8723a456707275eb30eb6ea2e482dde1",
-      "layout": {
-        "storage": [
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:23"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:28"
-          },
-          {
-            "contract": "Swapper",
-            "label": "admin",
-            "type": "t_address",
-            "src": "contracts/Swapper.sol:10"
-          }
-        ],
-        "types": {
-          "t_address": {
-            "label": "address"
-          },
-          "t_bool": {
-            "label": "bool"
-          }
-        }
-      }
-    },
     "1ca8c6a0f19b65520a731b0698dc64dbdf494143f93daa5b99d0934784f5fa70": {
       "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
       "txHash": "0xf70f77a622ebfc870df1f37dc6c6dd92dd4f543b0426e45273ab7e354b37bdb5",
@@ -1190,6 +1156,40 @@
           }
         }
       }
+    },
+    "b36bce475388a95117e99f20515e763a2f6d5ea2433effc6f37e39e299796456": {
+      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      "txHash": "0x69f50893e677a4f5db2ce2f194e607a205130c2c84948fd69cc913e81f51d371",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:30"
+          },
+          {
+            "contract": "SwapperV2",
+            "label": "admin",
+            "type": "t_address",
+            "src": "contracts/SwapperV2.sol:13"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
     }
   },
   "proxies": [
@@ -1226,7 +1226,7 @@
     {
       "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
       "kind": "transparent",
-      "txHash": "0x76ce9baab98e354c7375ac78ab11b9ba039f03adeeec07535d8b25d16a12f323"
+      "txHash": "0xb8df0b5041831130218c72e44c9efbebf6a4b1a26958bed9bb2824bbe76dee98"
     }
   ],
   "admin": {

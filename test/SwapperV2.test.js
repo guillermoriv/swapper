@@ -4,9 +4,10 @@ const assert = require('assert');
 let swapperV2;
 
 beforeEach(async () => {
-  const SwapperV2 = await ethers.getContractFactory('SwapperV2');
-  swapperV2 = await SwapperV2.deploy();
-  await swapperV2.deployed();
+  swapperV2 = await ethers.getContractAt(
+    'SwapperV2',
+    '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707'
+  );
 });
 
 describe('Testing the Swapper', () => {

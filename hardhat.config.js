@@ -4,13 +4,13 @@ require('@nomiclabs/hardhat-ethers');
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
-task('accounts', 'Prints the list of accounts', async () => {
-  const accounts = await web3.eth.getAccounts();
+// task('accounts', 'Prints the list of accounts', async () => {
+//   const accounts = await web3.eth.getAccounts();
 
-  for (const account of accounts) {
-    console.log(account);
-  }
-});
+//   for (const account of accounts) {
+//     console.log(account);
+//   }
+// });
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -20,7 +20,7 @@ task('accounts', 'Prints the list of accounts', async () => {
  */
 module.exports = {
   solidity: {
-    version: '0.8.4',
+    version: '0.7.0',
     settings: {
       optimizer: {
         enabled: true,

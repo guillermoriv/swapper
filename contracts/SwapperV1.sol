@@ -1,21 +1,17 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.4;
+pragma solidity ^0.7.0;
+pragma experimental ABIEncoderV2;
 
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "hardhat/console.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "./IExchangeProxy.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract SwapperV1 is Initializable {
   address private constant UniswapRouter = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
   address private admin;
   using SafeMath for uint;
-
-
-  address private constant proxyExchange = 0x3E66B66Fd1d0b02fDa6C811Da9E0547970DB2f21;
-  address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
-  address private constant ETH = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
-
+  
   function initialize(address _admin) public initializer {
     admin = _admin;
   }
@@ -25,6 +21,7 @@ contract SwapperV1 is Initializable {
       The value in wei, needs to be greater than 1.
     */
     require(msg.value >= 1, "Need to be greater then one");
+    console.log("msg.value: %s",msg.value);
 
     for (uint i = 0; i < _tokens.length; i++) {
       /*
@@ -46,12 +43,7 @@ contract SwapperV1 is Initializable {
     }
   }
 
-  function swapEthForTokensBalancer(address[] memory _tokens) external payable {
-    (IExchangeProxy.Swap[] memory swaps, uint256 amountIn) = IExchangeProxy(proxyExchange).viewSplitExactIn(WETH, _tokens[0], msg.value, 10);
-    IExchangeProxy(proxyExchange).batchSwapExactIn{value: msg.value}(swaps, TokenInterface(ETH), TokenInterface(_tokens[0]), amountIn, 10);
-  }
-
   function printVersion() external pure returns(string memory) {
-    return "Hello, this is version SwapperV1";
+    return "Hello, this is the version upgradeable of SwapperV1";
   }
 }
