@@ -1,19 +1,23 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.7.0;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.4;
 
-import "hardhat/console.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "./IExchangeProxy.sol";
 
-contract SwapperV2 {
+contract SwapperV2 is Initializable {
   address private constant UniswapRouter = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
   address private admin;
+
   using SafeMath for uint;
   address private constant proxyExchange = 0x3E66B66Fd1d0b02fDa6C811Da9E0547970DB2f21;
   address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
   address private constant ETH = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
+
+   function initialize(address _admin) public initializer {
+    admin = _admin;
+  }
 
   function swapEthForToken(address[] memory _tokens, uint256[] memory _porcents) external payable {
     /*
@@ -42,7 +46,6 @@ contract SwapperV2 {
   }
 
   function swapEthForTokensBalancer(address[] memory _tokens) external payable {
-    console.log("msg.value: %s", msg.value);
     (IExchangeProxy.Swap[] memory swaps, uint256 amountIn) = IExchangeProxy(proxyExchange).viewSplitExactIn(WETH, _tokens[0], msg.value, 10);
     IExchangeProxy(proxyExchange).batchSwapExactIn{value: msg.value}(swaps, TokenInterface(ETH), TokenInterface(_tokens[0]), amountIn, 10);
   }

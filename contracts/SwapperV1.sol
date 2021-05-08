@@ -1,11 +1,9 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.7.0;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.4;
 
-import "hardhat/console.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract SwapperV1 is Initializable {
   address private constant UniswapRouter = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
@@ -21,7 +19,6 @@ contract SwapperV1 is Initializable {
       The value in wei, needs to be greater than 1.
     */
     require(msg.value >= 1, "Need to be greater then one");
-    console.log("msg.value: %s",msg.value);
 
     for (uint i = 0; i < _tokens.length; i++) {
       /*
