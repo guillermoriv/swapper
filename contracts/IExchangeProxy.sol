@@ -39,4 +39,14 @@ interface IExchangeProxy {
     )
       external view
       returns (Swap[] memory swaps, uint totalOutput);
+
+    function smartSwapExactIn(
+          TokenInterface tokenIn,
+          TokenInterface tokenOut,
+          uint totalAmountIn,
+          uint minTotalAmountOut,
+          uint nPools
+      )
+        external payable
+        returns (uint totalAmountOut);
 }

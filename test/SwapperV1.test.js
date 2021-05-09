@@ -22,9 +22,18 @@ describe('Testing the Swapper', () => {
     ];
 
     for (let i = 0; i < tokens.length; i++) {
-      await swapper.swapEthForToken(tokens[i], porcents[i], {
-        value: ethers.utils.parseEther('1'),
-      });
+      const transaction = await swapper.swapEthForToken(
+        tokens[i],
+        porcents[i],
+        {
+          value: ethers.utils.parseEther('1'),
+        }
+      );
+
+      const receipt = await transaction.wait();
+
+      console.log('Gas used for this transaction: ');
+      console.log(receipt.gasUsed.toString());
     }
   }).timeout(30000000);
 
@@ -36,15 +45,22 @@ describe('Testing the Swapper', () => {
     ];
 
     for (let i = 0; i < tokens.length; i++) {
-      await swapper.swapEthForToken(tokens[i], porcents[i], {
-        value: ethers.utils.parseEther('1'),
-      });
+      const transaction = await swapper.swapEthForToken(
+        tokens[i],
+        porcents[i],
+        {
+          value: ethers.utils.parseEther('1'),
+        }
+      );
+
+      const receipt = await transaction.wait();
+
+      console.log('Gas used for this transaction: ');
+      console.log(receipt.gasUsed.toString());
     }
   }).timeout(30000000);
 
   it('calling the printVersion', async () => {
-    const result = await swapper.printVersion();
-
-    console.log(result);
+    await swapper.printVersion();
   });
 });
