@@ -59,7 +59,7 @@ contract SwapperV2 is Initializable {
 
     require(_porcent >= 1 && _porcent <= 1000, "Something between 1 and 1000");
     
-    IExchangeProxy(proxyExchange).smartSwapExactIn{value: msg.value.mul(_porcent).div(1000)}(TokenInterface(ETH), TokenInterface(_token), msg.value.mul(_porcent).div(1000), 1, 10);
+    IExchangeProxy(proxyExchange).smartSwapExactIn{value: msg.value.mul(_porcent).div(1000)}(TokenInterface(ETH), TokenInterface(_token), msg.value.mul(_porcent).div(1000), 1, 1);
     TokenInterface(_token).transfer(msg.sender, TokenInterface(_token).balanceOf(address(this)));
   }
 
