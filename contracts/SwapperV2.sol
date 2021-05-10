@@ -19,48 +19,52 @@ contract SwapperV2 is Initializable {
     admin = _admin;
   }
 
-  function swapEthForToken(address _token, uint256 _porcent) external payable {
+  function swapEthForTokens(address[] memory _tokens, uint256[] memory _porcents, string memory dex) external payable {
     /*
       The value in wei, needs to be greater than 1.
     */
     require(msg.value >= 1, "Need to be greater then one");
 
-    /*
-      This is the calculation of the %, already knowing that
-      the porcent needs to be between 1 and 1000, because we can't
-      handle decimals, so we pass the value %95.5 as 955 then divide that
-      for 1000 and get 0.955.
-    */
+    if (compareStrings(dex, "UNISWAP_V2")) {
+      /*
+        This is the calculation of the %, already knowing that
+        the porcent needs to be between 1 and 1000, because we can't
+        handle decimals, so we pass the value %95.5 as 955 then divide that
+        for 1000 and get 0.955.
+      */
 
-    require(_porcent >= 1 && _porcent <= 1000, "Something between 1 and 1000");
+      for (uint i = 0; i < _tokens.length; i++) {
+        require(_porcents[i] >= 1 && _porcents[i] <= 1000, "Something between 1 and 1000");
 
-    address[] memory _path = new address[](2);
-  
-    _path[0] = IUniswapV2Router02(UniswapRouter).WETH();
-    _path[1] = address(_token);
+        address[] memory _path = new address[](2);
 
-    IUniswapV2Router02(UniswapRouter).swapExactETHForTokens{value: msg.value.mul(_porcent).div(1000)}
-    (1, _path, msg.sender, block.timestamp + 3600);
-    
+        _path[0] = IUniswapV2Router02(UniswapRouter).WETH();
+        _path[1] = address(_tokens[i]);
+
+        IUniswapV2Router02(UniswapRouter).swapExactETHForTokens{value: msg.value.mul(_porcents[i]).div(1000)}
+        (1, _path, msg.sender, block.timestamp + 3600);
+      }
+    }
+
+    if (compareStrings(dex, "BALANCER")) {
+      /*
+        This is the calculation of the %, already knowing that
+        the porcent needs to be between 1 and 1000, because we can't
+        handle decimals, so we pass the value %95.5 as 955 then divide that
+        for 1000 and get 0.955.
+      */
+
+      for (uint i = 0; i < _tokens.length; i++) {
+        require(_porcents[i] >= 1 && _porcents[i] <= 1000, "Something between 1 and 1000");
+        
+        IExchangeProxy(proxyExchange).smartSwapExactIn{value: msg.value.mul(_porcents[i]).div(1000)}(TokenInterface(ETH), TokenInterface(_tokens[i]), msg.value.mul(_porcents[i]).div(1000), 1, 1);
+        TokenInterface(_tokens[i]).transfer(msg.sender, TokenInterface(_tokens[i]).balanceOf(address(this)));
+      }
+    }
   }
 
-  function swapEthForTokensBalancer(address _token, uint256 _porcent) external payable {
-    /*
-      The value in wei, needs to be greater than 1.
-    */
-    require(msg.value >= 1, "Need to be greater then one");
-    
-    /*
-      This is the calculation of the %, already knowing that
-      the porcent needs to be between 1 and 1000, because we can't
-      handle decimals, so we pass the value %95.5 as 955 then divide that
-      for 1000 and get 0.955.
-    */
-
-    require(_porcent >= 1 && _porcent <= 1000, "Something between 1 and 1000");
-    
-    IExchangeProxy(proxyExchange).smartSwapExactIn{value: msg.value.mul(_porcent).div(1000)}(TokenInterface(ETH), TokenInterface(_token), msg.value.mul(_porcent).div(1000), 1, 1);
-    TokenInterface(_token).transfer(msg.sender, TokenInterface(_token).balanceOf(address(this)));
+  function compareStrings(string memory a, string memory b) internal pure returns (bool) {
+    return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
   }
 
   function printVersion() external pure returns(string memory) {

@@ -21,20 +21,14 @@ describe('Testing the Swapper', () => {
       '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', // Uniswap Token
     ];
 
-    for (let i = 0; i < tokens.length; i++) {
-      const transaction = await swapper.swapEthForToken(
-        tokens[i],
-        porcents[i],
-        {
-          value: ethers.utils.parseEther('1'),
-        }
-      );
+    const transaction = await swapper.swapEthForToken(tokens, porcents, {
+      value: ethers.utils.parseEther('1'),
+    });
 
-      const receipt = await transaction.wait();
+    const receipt = await transaction.wait();
 
-      console.log('Gas used for this transaction: ');
-      console.log(receipt.gasUsed.toString());
-    }
+    console.log('Gas used for this transaction: ');
+    console.log(receipt.gasUsed.toString());
   }).timeout(30000000);
 
   it('change ETH for multiple tokens with % with decimals', async () => {
@@ -44,20 +38,14 @@ describe('Testing the Swapper', () => {
       '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', // Uniswap Token
     ];
 
-    for (let i = 0; i < tokens.length; i++) {
-      const transaction = await swapper.swapEthForToken(
-        tokens[i],
-        porcents[i],
-        {
-          value: ethers.utils.parseEther('1'),
-        }
-      );
+    const transaction = await swapper.swapEthForToken(tokens, porcents, {
+      value: ethers.utils.parseEther('1'),
+    });
 
-      const receipt = await transaction.wait();
+    const receipt = await transaction.wait();
 
-      console.log('Gas used for this transaction: ');
-      console.log(receipt.gasUsed.toString());
-    }
+    console.log('Gas used for this transaction: ');
+    console.log(receipt.gasUsed.toString());
   }).timeout(30000000);
 
   it('calling the printVersion', async () => {

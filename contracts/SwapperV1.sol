@@ -14,7 +14,7 @@ contract SwapperV1 is Initializable {
     admin = _admin;
   }
 
-  function swapEthForToken(address _token, uint256 _porcent) external payable {
+  function swapEthForTokens(address[] memory _tokens, uint256[] memory _porcents) external payable {
     /*
       The value in wei, needs to be greater than 1.
     */
@@ -27,16 +27,17 @@ contract SwapperV1 is Initializable {
       for 1000 and get 0.955.
     */
 
-    require(_porcent >= 1 && _porcent <= 1000, "Something between 1 and 1000");
+    for (uint i = 0; i < _tokens.length; i++) {
+      require(_porcents[i] >= 1 && _porcents[i] <= 1000, "Something between 1 and 1000");
 
-    address[] memory _path = new address[](2);
-  
-    _path[0] = IUniswapV2Router02(UniswapRouter).WETH();
-    _path[1] = address(_token);
+      address[] memory _path = new address[](2);
 
-    IUniswapV2Router02(UniswapRouter).swapExactETHForTokens{value: msg.value.mul(_porcent).div(1000)}
-    (1, _path, msg.sender, block.timestamp + 3600);
-    
+      _path[0] = IUniswapV2Router02(UniswapRouter).WETH();
+      _path[1] = address(_tokens[i]);
+
+      IUniswapV2Router02(UniswapRouter).swapExactETHForTokens{value: msg.value.mul(_porcents[i]).div(1000)}
+      (1, _path, msg.sender, block.timestamp + 3600);
+    }
   }
 
   function printVersion() external pure returns(string memory) {
