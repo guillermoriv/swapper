@@ -89,8 +89,8 @@ describe('Testing the Swapper', () => {
   it('change ETH for multiple tokens with % with decimals with uniswap', async () => {
     const porcents = [70.5 * 10, 29.5 * 10];
     const tokens = [
-      '0x6b175474e89094c44da98b954eedeac495271d0f', // DAI Stablecoin
-      '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', // Uniswap Token
+      '0x6B175474E89094C44Da98b954EedeAC495271d0F', // DAI Stablecoin
+      '0x514910771AF9Ca656af840dff83E8264EcF986CA', // Uniswap Token
     ];
 
     const transaction = await swapperV2.swapEthForTokens(
